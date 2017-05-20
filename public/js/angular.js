@@ -77,14 +77,18 @@ module.exports = __webpack_require__(8);
 /***/ }),
 
 /***/ 8:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /**
  * Created by mohamed on 5/19/2017.
  */
 
+
+
 var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'mainCtrl']);
 
+// change angular {{}} to {[{ }]}
 myApp.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
@@ -108,6 +112,9 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
     });
 
     $routeProvider.otherwise('/');
+
+    // remove hash from urls
+    $locationProvider.html5Mode(true);
 }]);
 
 /***/ })

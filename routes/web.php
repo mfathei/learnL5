@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('master');
 });
+
+
+Route::group(['prefix' => 'api'], function(){
+    Route::post('test', 'UserController@test');
+    Route::post('auth', 'UserController@checkAuth');
+});
+
+
+
+Route::resource('user', 'UserController');

@@ -7,14 +7,13 @@
 
 var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'mainCtrl']);
 
-
+// change angular {{}} to {[{ }]}
 myApp.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 });
 
 myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-
 
     $routeProvider.when('/', {
         templateUrl: 'templates/users/login.html',
