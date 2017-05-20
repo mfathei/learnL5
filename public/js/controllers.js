@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 43);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -75,22 +75,20 @@
  * Created by mohamed on 5/19/2017.
  */
 
-angular.module('mainCtrl', []).controller('userController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+angular.module('mainCtrl', []).controller('userController', ['$scope', '$location', 'userService', function ($scope, $location, userService) {
 
     $scope.required = true;
 
     angular.extend($scope, {
 
-        doLogin: function doLogin(loginFom) {
-            $http({
-                headers: { 'Content-Type': 'application/json' },
-                url: baseUrl + 'api/auth',
-                method: 'POST',
-                data: {
-                    'email': $scope.login.username,
-                    'password': $scope.login.password
-                }
-            }).then(function successCallback(response) {
+        doLogin: function doLogin() {
+
+            var loginData = {
+                'email': $scope.login.username,
+                'password': $scope.login.password
+            };
+
+            userService.checkAuth(loginData).then(function successCallback(response) {
                 console.log(response);
                 $location.path('/dashboard');
             }, function errorCallback(response) {
@@ -104,7 +102,7 @@ angular.module('mainCtrl', []).controller('userController', ['$scope', '$http', 
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(10);

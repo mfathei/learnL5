@@ -5,7 +5,7 @@
 
 'use strict';
 
-var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'mainCtrl']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'mainCtrl', 'userModule']);
 
 // change angular {{}} to {[{ }]}
 myApp.config(function ($interpolateProvider) {
