@@ -63,50 +63,57 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
+/***/ 39:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+
+/***/ 9:
 /***/ (function(module, exports) {
 
 /**
  * Created by mohamed on 5/19/2017.
  */
 
-angular.module('mainCtrl', []).controller('userController', ['$scope', '$location', 'userService', function ($scope, $location, userService) {
+myApp.module('mainCtrl', []).controller('userController', ['$scope', '$location', '$cookies', 'userService', function ($scope, $location, $cookies, userService) {
 
     $scope.required = true;
 
-    angular.extend($scope, {
+    $scope.login = {
+        'username': 'mahdy@test.com',
+        'password': 'secret'
+    };
 
-        doLogin: function doLogin() {
+    $scope.doLogin = function () {
 
-            var loginData = {
-                'email': $scope.login.username,
-                'password': $scope.login.password
-            };
+        var loginData = {
+            'email': this.login.username,
+            'password': this.login.password
+        };
 
-            userService.checkAuth(loginData).then(function successCallback(response) {
-                console.log(response);
-                $location.path('/dashboard');
-            }, function errorCallback(response) {
-                console.log(response);
-                alert(response.data);
-            });
-        }
+        userService.checkAuth(loginData).then(function successCallback(response) {
+            console.log(response);
+            $cookies.put('auth', JSON.stringify(response));
+            $location.path('/dashboard');
+        }, function errorCallback(response) {
+            console.log(response);
+            alert(response.data);
+        });
+    };
 
-    });
+    $scope.doLogout = function () {
+        userService.doUserLogout();
+        $location.path('/');
+    };
 }]);
-
-/***/ }),
-
-/***/ 44:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(10);
-
 
 /***/ })
 

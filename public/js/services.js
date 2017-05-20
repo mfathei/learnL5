@@ -63,19 +63,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 45);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 11:
+/***/ 10:
 /***/ (function(module, exports) {
 
 /**
- * Created by mohamed on 5/20/2017.
+ * Created by mohamed on 5/18/2017.
  */
 
-angular.module('userModule', []).factory('userService', ['$http', function ($http) {
+angular.module('userModule', []).factory('userService', ['$http', '$cookies', function ($http, $cookies) {
 
     return {
         checkAuth: function checkAuth(loginData) {
@@ -86,6 +86,20 @@ angular.module('userModule', []).factory('userService', ['$http', function ($htt
                 method: 'POST',
                 data: loginData
             });
+        },
+
+        getAuthStatus: function getAuthStatus() {
+
+            var status = angular.fromJson($cookies.get('auth'));
+            if (status) {
+                return true;
+            }
+
+            return false;
+        },
+
+        doUserLogout: function doUserLogout() {
+            $cookies.remove('auth');
         }
 
     };
@@ -93,10 +107,10 @@ angular.module('userModule', []).factory('userService', ['$http', function ($htt
 
 /***/ }),
 
-/***/ 45:
+/***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(11);
+module.exports = __webpack_require__(10);
 
 
 /***/ })
